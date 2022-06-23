@@ -18,15 +18,10 @@ import { Icon } from '@iconify/vue';
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/variables.scss' as global;
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
 
 $navbar-height: 50px;
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .navbar {
   display: flex;
@@ -34,18 +29,18 @@ $navbar-height: 50px;
   height: $navbar-height;
   padding: 20px;
   justify-content: space-between;
-  background-color: global.$color-accent;
+  background-color: variables.$color-accent;
 
   .menu, .buttons {
-    @include flex-center;
+    @include mixins.flex-center;
   }
 
   .menu {
-    gap: 20px;
+    gap: 25px;
 
     #logo {
       font-size: 1.5rem;
-      padding: 15px;
+      padding: 10px;
     }
   }
 
@@ -54,11 +49,11 @@ $navbar-height: 50px;
     gap: 0 25px;
 
     .button {
-      @include flex-center;
+      @include mixins.flex-center;
 
       .button-icon {
         opacity: 0.6;
-        transition: global.$hover-transition-duration;
+        transition: variables.$hover-transition-duration;
       }
       .button-icon:hover {
         opacity: 1.0;
