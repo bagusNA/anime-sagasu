@@ -3,3 +3,10 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin remove-appearance {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline-style: none;
+}

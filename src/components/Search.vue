@@ -1,35 +1,18 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-
-// temporary
-const categories = [
-  {
-    name: 'All',
-    id: 0
-  },
-  {
-    name: 'Anime',
-    id: 1,
-  },
-  {
-    name: 'Manga',
-    id: 2,
-  },
-  {
-    name: 'Light Novel',
-    id: 3,
-  }
-];
+import type { Categories } from '@/models/types/categories';
 
 interface Props {
-  modelValue: string,
+  search: string,
+  selectedCategory: number,
+  categories: Categories[],
   action: any
 }
 
 const { action } = defineProps<Props>();
-defineEmits(['update:modelValue']);
+defineEmits(['update:search', 'update:selectedCategory']);
 
-function enterKeyAction(e: KeyboardEvent) {
+const enterKeyAction = (e: KeyboardEvent) => {
   if (e.key === "Enter") action();
 }
 
@@ -37,18 +20,23 @@ function enterKeyAction(e: KeyboardEvent) {
 
 <template>
   <div class="search">
-    <div class="category">
+    <div class="search__category">
       <template v-for="category in categories" :key="category.id">
         <input 
           type="radio" 
           name="category"
-          class="category__input"
+          class="search__category__input"
           :id="category.name" 
-          :value="category.name"
+          :value="category.id"
+          :checked="selectedCategory === category.id"
+          @change="$emit(
+            'update:selectedCategory', 
+            parseInt(($event.target as HTMLInputElement).value)
+          )"
         >
         <label 
           :for="category.name"
-          class="category__label"
+          class="search__category__label"
         >
           {{ category.name }}
         </label>
@@ -57,12 +45,16 @@ function enterKeyAction(e: KeyboardEvent) {
     <div class="search__bar">
       <input 
         type="text" 
-        id="search-input"
-        :value="modelValue"
-        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        class="search__bar__input"
+        placeholder="Start searching!"
+        :value="search"
         @keydown="enterKeyAction"
+        @input="$emit(
+          'update:search', 
+          ($event.target as HTMLInputElement).value
+        )"
       >
-      <button>
+      <button class="search__bar__button">
         <Icon icon="ion:search" />
       </button>
     </div>
@@ -78,25 +70,26 @@ function enterKeyAction(e: KeyboardEvent) {
   @include mixins.flex-center;
   flex-direction: column;
   width: 100%;
-  padding: 20px 0;
+  padding: 25px 0;
+  gap: 20px 0;
 
-  .category {
-    display: inline-flex;
+  &__category {
+    display: flex;
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.5);
+    box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.5);
 
-    .category__input {
+    &__input {
       display: none;
 
-      &:checked + .category__label {
-        background-color: variables.$color-primary-2;
+      &:checked + .search__category__label {
+        background-color: variables.$color-accent;
       }
     }
 
-    .category__label {
+    &__label {
       padding: 5px 14px;
-      font-size: 1.15rem;
+      font-size: 1rem;
       background-color: variables.$color-primary-1;
       cursor: pointer;
       user-select: none;
@@ -105,7 +98,63 @@ function enterKeyAction(e: KeyboardEvent) {
       &:not(:last-of-type) {
         border-right: 1px solid variables.$color-primary-2;
       }
+
+      &:hover {
+        background-color: variables.$color-primary-2;
+      }
     }
+  }
+
+  &__bar {
+    display: flex;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.5);
+    padding: 6px;
+
+    &__input {
+      @include mixins.remove-appearance;
+      width: 80vw;
+      padding-left: 15px;
+      font-size: 1.1rem;
+    }
+
+    &__button {
+      @include mixins.flex-center;
+      @include mixins.remove-appearance;
+      color: #ffffff;
+      background-color: variables.$color-accent;
+      border-radius: 100%;
+      height: 1.75rem;
+      width: 1.75rem;
+      font-size: 1.1rem;
+      box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.5);
+      cursor: pointer;
+      transition: 0.1s;
+
+      &:hover {
+        color: initial;
+        background-color: variables.$color-primary-1;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .search__bar__input {
+    width: 50vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .search__bar__input {
+    width: 40vw;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .search__bar__input {
+    width: 30vw;
   }
 }
 </style>

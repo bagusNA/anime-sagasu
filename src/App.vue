@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { categories as defaultCategories } from './models/categories';
+
 import Navbar from './components/Navbar.vue';
 import Search from './components/Search.vue';
 
 const searchQuery = ref('');
+const categories = ref({
+  selectedId: 0,
+  list: defaultCategories
+});
+
 
 function test() {
-  console.log('clicked')
+  console.log(searchQuery.value)
 }
 </script>
 
@@ -18,9 +25,11 @@ function test() {
   </Navbar>
 
   <Search 
-    :modelValue="searchQuery" 
+    v-model:search="searchQuery"
+    v-model:selectedCategory="categories.selectedId"
+    :categories="categories.list"
     :action="test"
-    />
+  />
 
 </template>
 
