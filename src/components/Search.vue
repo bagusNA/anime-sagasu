@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import type { Categories } from '@/models/types/categories';
+import type { Category } from '@/models/types/Category';
 
 interface Props {
   search: string,
   selectedCategory: number,
-  categories: Categories[],
+  categories: Category[],
   action: any
 }
 
