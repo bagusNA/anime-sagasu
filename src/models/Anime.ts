@@ -8,6 +8,10 @@ const Anime = {
 
   getSearch: (query: string) => {
     return urlFetch(`${Anime.url}?q=${query}`);
+  },
+
+  getAnimeFullById: (id: number) => {
+    return urlFetch(`${Anime.url}/${id}/full`);
   }
 }
 
