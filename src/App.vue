@@ -5,6 +5,7 @@ import { categories as defaultCategories } from './models/categories';
 
 import Navbar from './components/Navbar.vue';
 import Search from './components/Search.vue';
+import Anime from './models/Anime';
 
 const searchQuery = ref('');
 const categories = ref({
@@ -12,8 +13,10 @@ const categories = ref({
   list: defaultCategories
 });
 
-function test() {
-  console.log(searchQuery.value)
+async function test() {
+  const {data, error} = await Anime.getSearch('Golden');
+  console.log(data);
+  console.log(error);
 }
 </script>
 
