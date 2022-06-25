@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { RouterView } from 'vue-router';
 import { categories as defaultCategories } from './models/categories';
 
 import Navbar from './components/Navbar.vue';
@@ -10,7 +11,6 @@ const categories = ref({
   selectedId: 0,
   list: defaultCategories
 });
-
 
 function test() {
   console.log(searchQuery.value)
@@ -30,6 +30,8 @@ function test() {
     :categories="categories.list"
     :action="test"
   />
+
+  <RouterView></RouterView>
 
 </template>
 
