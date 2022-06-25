@@ -63,7 +63,7 @@ const enterKeyAction = (e: KeyboardEvent) => {
 
 <style scoped lang="scss">
 @use '@/assets/base.scss';
-@use '@/assets/variables' as variables;
+@use '@/assets/variables' as var;
 @use '@/assets/mixins.scss' as mixins;
 
 .search {
@@ -71,7 +71,7 @@ const enterKeyAction = (e: KeyboardEvent) => {
   flex-direction: column;
   width: 100%;
   padding: 25px 0;
-  gap: 20px 0;
+  gap: 15px 0;
 
   &__category {
     display: flex;
@@ -83,24 +83,24 @@ const enterKeyAction = (e: KeyboardEvent) => {
       display: none;
 
       &:checked + .search__category__label {
-        background-color: variables.$color-accent;
+        background-color: var.$color-accent;
       }
     }
 
     &__label {
       padding: 5px 14px;
-      font-size: 1rem;
-      background-color: variables.$color-primary-1;
+      font-size: var.$fs-sm;
+      background-color: var.$color-primary-1;
       cursor: pointer;
       user-select: none;
       transition: background 0.15s;
 
       &:not(:last-of-type) {
-        border-right: 1px solid variables.$color-primary-2;
+        border-right: 1px solid var.$color-primary-2;
       }
 
       &:hover {
-        background-color: variables.$color-primary-2;
+        background-color: var.$color-primary-2;
       }
     }
   }
@@ -115,15 +115,15 @@ const enterKeyAction = (e: KeyboardEvent) => {
     &__input {
       @include mixins.remove-appearance;
       width: 80vw;
-      padding-left: 15px;
-      font-size: 1.1rem;
+      padding: 0 15px;
+      font-size: var.$fs;
     }
 
     &__button {
       @include mixins.flex-center;
       @include mixins.remove-appearance;
       color: #ffffff;
-      background-color: variables.$color-accent;
+      background-color: var.$color-accent;
       border-radius: 100%;
       height: 1.75rem;
       width: 1.75rem;
@@ -134,7 +134,7 @@ const enterKeyAction = (e: KeyboardEvent) => {
 
       &:hover {
         color: initial;
-        background-color: variables.$color-primary-1;
+        background-color: var.$color-primary-1;
       }
     }
   }
