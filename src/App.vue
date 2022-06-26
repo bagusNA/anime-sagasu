@@ -34,7 +34,9 @@ async function test() {
     :action="test"
   />
 
-  <RouterView></RouterView>
+  <Suspense>
+    <RouterView></RouterView>
+  </Suspense>
 
 </template>
 
