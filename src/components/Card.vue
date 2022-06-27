@@ -2,7 +2,7 @@
 defineProps<{
   title: string,
   image: string
-}>()
+}>();
 </script>
 
 <template>
@@ -24,6 +24,7 @@ defineProps<{
   }
 
   &__title {
+    color: rgba($color: #000000, $alpha: 0.75);
     font-size: var.$fs-sm;
     font-weight: 400;
     overflow: hidden;
