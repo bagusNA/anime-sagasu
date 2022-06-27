@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useKeenSlider } from "keen-slider/vue.es";
 import type { Media } from '@/models/types/Media';
 import Card from './Card.vue';
 
@@ -8,7 +9,29 @@ const { items } = defineProps<{
   href?: string
 }>();
 
-const slicedItems = items.slice(0, 10);
+const [sliderContainer] = useKeenSlider({
+  renderMode: "performance",
+  loop: false,
+  mode: "snap",
+  slides: {
+    perView: 3,
+    spacing: 10
+  },
+  breakpoints: {
+    '(min-width: 600px)': {
+      slides: { perView: 4, spacing: 10 }
+    },
+    '(min-width: 768px)': {
+      slides: { perView: 5, spacing: 15 }
+    },
+    '(min-width: 1024px)': {
+      slides: { perView: 6, spacing: 20 }
+    },
+    '(min-width: 1280px)': {
+      slides: { perView: 7, spacing: 20 }
+    },
+  }
+})
 
 </script>
 
@@ -24,14 +47,13 @@ const slicedItems = items.slice(0, 10);
         See more
       </a>
     </div>
-    <div class="collection__main">
+    <div ref="sliderContainer" class="collection__main keen-slider">
       <Card 
-        v-for="item in slicedItems" :key="item.mal_id" 
+        v-for="item in items" :key="item.mal_id" 
         :title="item.title"
         :image="item.images?.jpg?.image_url!"
-        class="collection__main__item"
+        class="keen-slider__slide"
       />
-      
     </div>
   </div>
 </template>
@@ -40,71 +62,47 @@ const slicedItems = items.slice(0, 10);
 @use '@/assets/base.scss';
 @use '@/assets/mixins.scss' as mixins;
 @use '@/assets/variables' as var;
-
-// .collection {
-//   @include mixins.flex-column;
-//   // width: 100%;
-
-//   &__top {
-//     display: flex;
-//     justify-content: space-between;
-
-//     &__title {
-//       font-size: var.$fs-lg;
-//     }
-//   }
-
-//   &__main {
-//     display: flex;
-//     flex-wrap: nowrap;
-//     overflow-x: scroll;
-//     gap: 10px;
-    
-//   }
-// }
-
-
+@import url('keen-slider/keen-slider.min.css');
 
 .collection {
-  @include mixins.flex-column;
-
   &__top {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 
     &__title {
-      font-size: var.$fs-lg;
+      font-size: var.$fs;
+    }
+
+    &__link {
+      @include mixins.flex-center;
+      font-size: var.$fs-xs;
+      color: rgba($color: #000000, $alpha: 0.75);
+      transition: 200ms;
+
+      &:hover {
+      color: rgba($color: #000000, $alpha: 1.0);
+      }
     }
   }
 
   &__main {
-    display: grid;
-    column-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    justify-content: space-between;
+    width: 100%;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .collection {
-    &__main {
-      grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-    }
-  }
-}
+    &__top {
+      margin-bottom: 15px;
 
-@media only screen and (min-width: 1024px) {
-  .collection {
-    &__main {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-  }
-}
+      &__title {
+        font-size: var.$fs-lg;
+      }
 
-@media only screen and (min-width: 1280px) {
-  .collection {
-    &__main {
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      &__link {
+        font-size: var.$fs-sm;
+      }
     }
   }
 }
