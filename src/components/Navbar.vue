@@ -1,27 +1,34 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 </script>
 
 <template>
   <div class="navbar">
-    <div class="menu">
-      <a href="#" id="logo">Anime-Sagasu</a>
+    <div class="navbar__menu">
+      <RouterLink to="/" class="logo">Anime-Sagasu</RouterLink>
       <!-- Accepts link anchors -->
       <slot></slot>
     </div>
 
-    <div class="buttons">
-      <a href="#" class="button"><Icon icon="ion:sunny" class="button-icon" id="theme-toggle" /></a>
-      <a href="github.com" class="button"><Icon icon="ion:logo-github" class="button-icon" /></a>
+    <div class="navbar__buttons">
+      <a href="#" class="button">
+        <Icon icon="ion:sunny" class="button-icon theme-toggle" />
+      </a>
+      <a href="github.com" class="button">
+        <Icon icon="ion:logo-github" class="button-icon" />
+      </a>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/variables.scss' as variables;
+@use '@/assets/base.scss';
+@use '@/assets/variables.scss' as var;
 @use '@/assets/mixins.scss' as mixins;
 
 $navbar-height: 50px;
+$icon-size: 1.5rem;
 
 .navbar {
   display: flex;
@@ -29,23 +36,24 @@ $navbar-height: 50px;
   height: $navbar-height;
   padding: 20px;
   justify-content: space-between;
-  background-color: variables.$color-accent;
+  background-color: var.$color-accent;
 
-  .menu, .buttons {
+  &__menu, &__buttons {
     @include mixins.flex-center;
   }
 
-  .menu {
+  &__menu {
     gap: 25px;
+    font-size: var.$fs-xs;
 
-    #logo {
-      font-size: 1.5rem;
+    .logo {
+      font-size: var.$fs;
       padding: 10px;
     }
   }
 
-  .buttons {
-    font-size: 2rem;
+  &__buttons {
+    font-size: $icon-size;
     gap: 0 25px;
 
     .button {
@@ -53,18 +61,17 @@ $navbar-height: 50px;
 
       .button-icon {
         opacity: 0.6;
-        transition: variables.$hover-transition-duration;
+        transition: var.$hover-transition-duration;
       }
       .button-icon:hover {
         opacity: 1.0;
         cursor: pointer;
       }
 
-      #theme-toggle {
-        font-size: 1.5rem;
+      .theme-toggle {
+        font-size: calc($icon-size - 0.25rem);
       }
     }
   }
 }
-
 </style>
