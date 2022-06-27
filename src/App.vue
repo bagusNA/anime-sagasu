@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterView } from 'vue-router';
+import { RouterView, RouterLink } from 'vue-router';
 import { categories as defaultCategories } from './models/categories';
 
 import Navbar from './components/Navbar.vue';
@@ -22,7 +22,8 @@ async function test() {
 
 <template>
   <Navbar>
-    <a href="#">Browse</a>
+    <!-- <a href="">Browse</a> -->
+    <RouterLink to="/search">Browse</RouterLink>
     <a href="#">Top</a>
     <a href="#">Seasonal</a>
   </Navbar>
