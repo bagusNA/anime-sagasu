@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
 import { categories as defaultCategories } from './models/categories';
 
-import Navbar from './components/Navbar.vue';
+import Navbar from './components/layouts/Navbar.vue';
+import Footer from './components/layouts/Footer.vue';
 import Search from './components/Search.vue';
 import Anime from './models/Anime';
 
@@ -22,7 +23,6 @@ async function test() {
 
 <template>
   <Navbar>
-    <!-- <a href="">Browse</a> -->
     <RouterLink to="/search">Browse</RouterLink>
     <a href="#">Top</a>
     <a href="#">Seasonal</a>
@@ -39,6 +39,7 @@ async function test() {
     <RouterView></RouterView>
   </Suspense>
 
+  <Footer></Footer>
 </template>
 
 <style lang="scss">
