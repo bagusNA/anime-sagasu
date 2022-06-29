@@ -22,26 +22,40 @@ async function test() {
 </script>
 
 <template>
-  <Navbar>
-    <RouterLink to="/search">Browse</RouterLink>
-    <a href="#">Top</a>
-    <a href="#">Seasonal</a>
-  </Navbar>
+  <div class="container">
+    <Navbar>
+      <RouterLink to="/search">Browse</RouterLink>
+      <a href="#">Top</a>
+      <a href="#">Seasonal</a>
+    </Navbar>
 
-  <Search 
-    v-model:search="searchQuery"
-    v-model:selectedCategory="categories.selectedId"
-    :categories="categories.list"
-    :action="test"
-  />
+    <Search 
+      v-model:search="searchQuery"
+      v-model:selectedCategory="categories.selectedId"
+      :categories="categories.list"
+      :action="test"
+    />
 
-  <Suspense>
-    <RouterView></RouterView>
-  </Suspense>
+    <div class="view-container">
+      <Suspense>
+        <RouterView></RouterView>
+      </Suspense>
+    </div>
 
-  <Footer></Footer>
+    <Footer></Footer>
+  </div>
 </template>
 
 <style lang="scss">
 @use '@/assets/base.scss';
+@use '@/assets/mixins.scss' as mixins;
+
+.container {
+  @include mixins.flex-column;
+  min-height: 100vh;
+}
+
+.view-container {
+  flex-grow: 1;
+}
 </style>
