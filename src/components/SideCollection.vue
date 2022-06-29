@@ -1,0 +1,130 @@
+<script setup lang="ts">
+import type { Media } from '@/models/types/Media';
+import { RouterLink } from 'vue-router';
+
+defineProps<{
+  title: string,
+  items: Media[],
+  link?: string,
+  width?: string
+}>();
+
+</script>
+
+<template>
+  <div class="side-collection">
+    <div class="side-collection__header">
+      <p class="side-collection__header__title">{{ title }}</p>
+      <RouterLink to="#" class="side-collection__header__link">
+        View all
+      </RouterLink>
+    </div>
+    <div class="side-collection__main">
+      <RouterLink 
+        v-for="item in items" :key="item.mal_id"
+        class="side-collection__card"
+        to="#"
+      >
+        <img 
+          :src="item.images?.jpg?.image_url!" 
+          :alt="item.title" 
+          class="side-collection__card__poster"
+        >
+
+        <div class="side-collection__card__main">
+          <p class="side-collection__card__title"><a href="#">{{ item.title }}</a></p>
+          <span class="side-collection__card__info">{{ `${item.type}, scored ${item.score}` }} </span>
+          <span class="side-collection__card__info">{{ `${item.members} members` }}</span>
+        </div>
+      </RouterLink>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+@use '@/assets/base.scss';
+@use '@/assets/variables' as var;
+@use '@/assets/mixins.scss' as mixins;
+
+$border-radius: 5px;
+
+.side-collection {
+  width: 100%;
+  padding-bottom: 10px;
+  border-radius: $border-radius;
+  background-color: var.$color-primary-2;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    background-color: var.$color-primary-1;
+
+    &__title {
+      max-width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__link {
+      @include mixins.flex-center;
+      font-size: var.$fs-xs;
+      color: rgba($color: #000000, $alpha: 0.75);
+      transition: 100ms;
+
+      &:hover {
+        color: rgba($color: #000000, $alpha: 1.0)
+      }
+    }
+  }
+
+  &__main {
+    @include mixins.flex-column;
+    gap: 10px 0;
+  }
+
+  &__card {
+    display: flex;
+    height: 100px;
+    padding-right: 10px;
+    margin-left: 10px;
+    gap: 0 15px;
+    cursor: pointer;
+    transition: 100ms;
+
+    &__poster {
+      height: 100%;
+      border-radius: 5px;
+      transition: 100ms;
+    }
+
+    &__main {
+      @include mixins.flex-column;
+      flex-grow: 1;
+    }
+
+    &__title {
+      @include mixins.line-clamp;
+      font-size: var.$fs-sm;
+      margin-bottom: 5px;
+    }
+
+    &__info {
+      font-size: var.$fs-xs;
+      color: rgba($color: #000000, $alpha: 0.75);
+    }
+
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+
+      & > .side-collection__card__poster {
+        filter: brightness(0.75);
+      }
+    }
+  }
+}
+</style>

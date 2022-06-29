@@ -15,6 +15,7 @@ defineProps<{
 <style scoped lang="scss">
 @use '@/assets/base.scss';
 @use '@/assets/variables' as var;
+@use '@/assets/mixins.scss' as mixins;
 
 .card {
   &__poster {
@@ -24,19 +25,10 @@ defineProps<{
   }
 
   &__title {
+    @include mixins.line-clamp;
     color: rgba($color: #000000, $alpha: 0.75);
     font-size: var.$fs-sm;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    @supports (-webkit-line-clamp: 2) {
-      white-space: initial;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
   }
 }
 </style>
