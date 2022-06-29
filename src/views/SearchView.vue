@@ -1,10 +1,14 @@
 <script setup lang="ts">
+defineProps<{
+  query?: string,
+  cat?: number
+}>();
 
 </script>
 
 <template>
-  <div>
-    SEARCH
+  <div class="search">
+    {{ query }}
   </div>
 </template>
 
