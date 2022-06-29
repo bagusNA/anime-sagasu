@@ -54,7 +54,10 @@ const enterKeyAction = (e: KeyboardEvent) => {
           ($event.target as HTMLInputElement).value
         )"
       >
-      <button class="search__bar__button">
+      <button 
+        class="search__bar__button"
+        @click="action"
+      >
         <Icon icon="ion:search" />
       </button>
     </div>
