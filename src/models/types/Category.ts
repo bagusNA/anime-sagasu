@@ -1,4 +1,5 @@
 export interface Category {
   id: Number,
-  name: string,
+  name: String,
+  search: Function
 }
