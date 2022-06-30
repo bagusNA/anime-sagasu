@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, unref } from 'vue';
-import { RouterView, RouterLink } from 'vue-router';
-import router from './router';
+import { RouterView, RouterLink, useRouter } from 'vue-router';
+
 import { categories as defaultCategories } from './models/categories';
 
 import Navbar from './components/layouts/Navbar.vue';
 import Footer from './components/layouts/Footer.vue';
 import Search from './components/Search.vue';
 
+const router = useRouter();
 const searchQuery = ref('');
 const categories = ref({
   selectedId: 0,
