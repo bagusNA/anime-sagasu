@@ -3,7 +3,7 @@ import Collection from '@/components/Collection.vue';
 import SideCollection from '@/components/SideCollection.vue';
 import Season from '@/models/Season';
 
-const {data, error} = await Season.getSeasonNow();
+const data = await Season.getSeasonNow();
 const slicedItems = data.data.slice(0,10)
 
 </script>
