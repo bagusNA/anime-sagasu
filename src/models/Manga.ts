@@ -7,7 +7,7 @@ const Manga = {
   },
 
   getSearch: (query: string) => {
-    return urlFetch(`${Manga.url}?q=${query}`);
+    return urlFetch(`${Manga.url}?q=${query}?type=manga`);
   },
 
   getMangaFullById: (id: number) => {
