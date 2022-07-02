@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, routeLocationKey } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -17,6 +17,14 @@ const router = createRouter({
         query: route.query.q,
         category: route.query.cat
       })
+    },
+    {
+      path: '/anime/:id',
+      name: 'anime',
+      component: () => import('../views/AnimeDetailsView.vue'),
+      props: route => {
+        id: route.params.id
+      }
     }
   ]
 })
