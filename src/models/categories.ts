@@ -14,18 +14,25 @@ export const categories: Category[] = [
     id: 1,
     name: 'Anime',
     search: async (query: string) => {
-      return await (await Anime.getSearch(query)).data;
+      return await (await Anime.getAnimeSearch(query)).data;
     },
   },
   {
     id: 2,
+    name: 'Movie',
+    search: async (query: string) => {
+      return await (await Anime.getMovieSearch(query)).data;
+    },
+  },
+  {
+    id: 3,
     name: 'Manga',
     search: async (query: string) => {
       return await (await Manga.getSearch(query)).data;
     },
   },
   {
-    id: 3,
+    id: 4,
     name: 'Light Novel',
     search: async (query: string) => {
       return await (await Manga.getNovelSearch(query)).data;

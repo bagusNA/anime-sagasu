@@ -7,7 +7,7 @@ const Manga = {
   },
 
   getSearch: (query: string) => {
-    return urlFetch(`${Manga.url}?q=${query}?type=manga`);
+    return urlFetch(`${Manga.url}?q=${query}&type=manga&sfw=true`);
   },
 
   getMangaFullById: (id: number) => {
@@ -16,7 +16,7 @@ const Manga = {
 
   // Light Novel
   getNovelSearch: (query: string) => {
-    return urlFetch(`${Manga.url}?q=${query}?type=lightnovel`);
+    return urlFetch(`${Manga.url}?q=${query}&type=lightnovel&sfw=true`);
   },
 }
 

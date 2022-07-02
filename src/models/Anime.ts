@@ -7,7 +7,15 @@ const Anime = {
   },
 
   getSearch: (query: string) => {
-    return urlFetch(`${Anime.url}?q=${query}`);
+    return urlFetch(`${Anime.url}?q=${query}&sfw=true`);
+  },
+  
+  getAnimeSearch: (query: string) => {
+    return urlFetch(`${Anime.url}?q=${query}&type=tv&sfw=true`);
+  },
+  
+  getMovieSearch: (query: string) => {
+    return urlFetch(`${Anime.url}?q=${query}&type=movie&sfw=true`);
   },
 
   getAnimeFullById: (id: number) => {
