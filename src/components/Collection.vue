@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
 import { useKeenSlider } from "keen-slider/vue.es";
+
 import type { Media } from '@/models/types/Media';
 import Card from './Card.vue';
 
@@ -48,12 +50,16 @@ const [sliderContainer] = useKeenSlider({
       </a>
     </div>
     <div ref="sliderContainer" class="collection__main keen-slider">
-      <Card 
-        v-for="item in items" :key="item.mal_id" 
-        :title="item.title"
-        :image="item.images?.jpg?.image_url!"
-        class="keen-slider__slide"
-      />
+      <RouterLink
+        v-for="item in items" 
+        :to="{ name: 'anime', params: { id: item.mal_id } }"
+      >
+        <Card 
+          :title="item.title"
+          :image="item.images?.jpg?.image_url!"
+          class="keen-slider__slide"
+        />
+      </RouterLink>
     </div>
   </div>
 </template>

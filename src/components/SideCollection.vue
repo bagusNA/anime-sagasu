@@ -22,8 +22,8 @@ defineProps<{
     <div class="side-collection__main">
       <RouterLink 
         v-for="item in items" :key="item.mal_id"
+        :to="{ name: 'anime', params: { id: item.mal_id } }"
         class="side-collection__card"
-        to="#"
       >
         <img 
           :src="item.images?.jpg?.image_url!" 
@@ -32,8 +32,8 @@ defineProps<{
         >
 
         <div class="side-collection__card__main">
-          <p class="side-collection__card__title"><a href="#">{{ item.title }}</a></p>
-          <span class="side-collection__card__info">{{ `${item.type}, scored ${item.score}` }} </span>
+          <p class="side-collection__card__title">{{ item.title }}</p>
+          <span class="side-collection__card__info">{{ `${item.type}, scored ${item.score ?? '-'}` }} </span>
           <span class="side-collection__card__info">{{ `${item.members} members` }}</span>
         </div>
       </RouterLink>
