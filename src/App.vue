@@ -29,7 +29,7 @@ async function searchAction() {
 </script>
 
 <template>
-  <div class="container">
+  <div class="app-wrapper">
     <Navbar>
       <RouterLink :to="{ name: 'search' }">Browse</RouterLink>
       <a href="#">Top</a>
@@ -58,7 +58,7 @@ async function searchAction() {
 @use '@/assets/base.scss';
 @use '@/assets/mixins.scss' as mixins;
 
-.container {
+.app-wrapper {
   @include mixins.flex-column;
   min-height: 100vh;
 }
