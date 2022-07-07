@@ -56,11 +56,13 @@ async function searchAction() {
 
 <style lang="scss">
 @use '@/assets/base.scss';
+@use '@/assets/variables' as var;
 @use '@/assets/mixins.scss' as mixins;
 
 .app-wrapper {
   @include mixins.flex-column;
   min-height: 100vh;
+  background-color: var.$color-background-light;
 }
 
 .view-container {

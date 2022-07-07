@@ -32,7 +32,7 @@ const slicedItems = data.data.slice(0,10)
   display: flex;
   width: 95vw;
   height: 100%;
-  padding: 0 10px;
+  padding: 0 5px;
   margin: auto;
   gap: 0 10px;
   justify-content: center;
@@ -41,10 +41,9 @@ const slicedItems = data.data.slice(0,10)
     @include mixins.flex-column;
     width: 100%;
     max-width: 1000px;
-    padding: 20px 25px;
+    padding: 5px;
     gap: 20px 0;
     border-radius: 10px;
-    background-color: var.$color-accent;
   }
 
   &__side-content {
@@ -71,6 +70,7 @@ const slicedItems = data.data.slice(0,10)
   .home {
     &__main {
       width: 70%;
+      padding: 15px 20px;
     }
 
     &__side-content {
@@ -80,16 +80,4 @@ const slicedItems = data.data.slice(0,10)
   }
 }
 
-@media only screen and (min-width: 1280px) {
-  .home {
-    &__main {
-      width: 70%;
-    }
-
-    &__side-content {
-      @include mixins.flex-column;
-      width: 30%;
-    }
-  }
-}
 </style>

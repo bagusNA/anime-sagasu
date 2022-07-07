@@ -27,16 +27,17 @@ import { Icon } from '@iconify/vue';
 @use '@/assets/variables.scss' as var;
 @use '@/assets/mixins.scss' as mixins;
 
-$navbar-height: 50px;
+$navbar-height: 40px;
 $icon-size: 1.5rem;
 
 .navbar {
   display: flex;
   width: 100%;
   height: $navbar-height;
-  padding: 20px;
+  padding: 0 15px;
   justify-content: space-between;
-  background-color: var.$color-accent;
+  background-color: var.$color-primary;
+  color: var.$color-accent;
 
   &__menu, &__buttons {
     @include mixins.flex-center;
@@ -48,7 +49,11 @@ $icon-size: 1.5rem;
 
     .logo {
       font-size: var.$fs;
-      padding: 10px;
+      padding: 0 5px;
+    }
+
+    & :not(.logo) {
+      display: none;
     }
   }
 
@@ -71,6 +76,16 @@ $icon-size: 1.5rem;
       .theme-toggle {
         font-size: calc($icon-size - 0.25rem);
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar {
+    height: calc($navbar-height + 10px);
+
+    &__menu :not(.logo) {
+      display: block;
     }
   }
 }

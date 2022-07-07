@@ -51,17 +51,18 @@ $border-radius: 5px;
 .side-collection {
   width: 100%;
   padding-bottom: 10px;
+  border: 2px solid var.$color-primary;
   border-radius: $border-radius;
-  background-color: var.$color-primary-2;
+  background-color: var.$color-accent;
+  overflow: hidden;
 
   &__header {
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
     margin-bottom: 10px;
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
-    background-color: var.$color-primary-1;
+    color: var.$color-accent;
+    background-color: var.$color-primary;
 
     &__title {
       max-width: 70%;
@@ -73,11 +74,11 @@ $border-radius: 5px;
     &__link {
       @include mixins.flex-center;
       font-size: var.$fs-xs;
-      color: rgba($color: #000000, $alpha: 0.75);
+      color: rgba($color: var.$color-accent, $alpha: 0.75);
       transition: 100ms;
 
       &:hover {
-        color: rgba($color: #000000, $alpha: 1.0)
+        color: rgba($color: var.$color-accent, $alpha: 1.0)
       }
     }
   }
@@ -95,6 +96,7 @@ $border-radius: 5px;
     gap: 0 15px;
     cursor: pointer;
     transition: 100ms;
+    font-size: var.$fs-sm;
 
     &__poster {
       height: 100%;
@@ -109,7 +111,6 @@ $border-radius: 5px;
 
     &__title {
       @include mixins.line-clamp;
-      font-size: var.$fs-sm;
       margin-bottom: 5px;
     }
 
@@ -124,6 +125,11 @@ $border-radius: 5px;
       & > .side-collection__card__poster {
         filter: brightness(0.75);
       }
+    }
+
+    &:first-of-type {
+      color: var.$color-primary;
+      font-size: var.$fs;
     }
   }
 }

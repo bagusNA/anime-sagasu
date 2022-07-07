@@ -73,7 +73,7 @@ const enterKeyAction = (e: KeyboardEvent) => {
   @include mixins.flex-center;
   flex-direction: column;
   width: 100%;
-  padding: 25px 0;
+  padding: 20px 0;
   gap: 15px 0;
 
   &__category {
@@ -86,24 +86,27 @@ const enterKeyAction = (e: KeyboardEvent) => {
       display: none;
 
       &:checked + .search__category__label {
-        background-color: var.$color-accent;
+        color: var.$color-accent;
+        background-color: var.$color-primary;
       }
     }
 
     &__label {
-      padding: 5px 14px;
+      padding: 5px 10px;
       font-size: var.$fs-sm;
-      background-color: var.$color-primary-1;
+      color: var.$color-primary;
+      background-color: var.$color-accent;
       cursor: pointer;
       user-select: none;
       transition: background 0.15s;
 
       &:not(:last-of-type) {
-        border-right: 1px solid var.$color-primary-2;
+        border-right: transparent;
       }
 
       &:hover {
-        background-color: var.$color-primary-2;
+        color: var.$color-accent;
+        background-color: rgba($color: var.$color-primary, $alpha: 0.8);
       }
     }
   }
@@ -125,8 +128,8 @@ const enterKeyAction = (e: KeyboardEvent) => {
     &__button {
       @include mixins.flex-center;
       @include mixins.remove-appearance;
-      color: #ffffff;
-      background-color: var.$color-accent;
+      color: var.$color-accent;
+      background-color: var.$color-primary;
       border-radius: 100%;
       height: 1.75rem;
       width: 1.75rem;
@@ -136,14 +139,24 @@ const enterKeyAction = (e: KeyboardEvent) => {
       transition: 0.1s;
 
       &:hover {
-        color: initial;
-        background-color: var.$color-primary-1;
+        color: var.$color-primary;
+        background-color: var.$color-accent;
       }
     }
   }
 }
 
+@media only screen and (min-width: 600px) {
+  .search__category__label {
+    padding: 5px 12px;
+  }
+}
+
 @media only screen and (min-width: 768px) {
+  .search__category__label {
+    padding: 5px 14px;
+  }
+  
   .search__bar__input {
     width: 50vw;
   }

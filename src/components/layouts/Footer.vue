@@ -5,12 +5,19 @@ import { Icon } from '@iconify/vue';
 <template>
   <footer class="footer">
     <div class="footer__container">
-      <p class="footer__main">Created by <a href="https://github.com/bagusNA" class="footer__link">Bagus Nur A.</a></p>
+      <p class="footer__main">
+        Created by 
+        <a href="https://github.com/bagusNA" class="footer__link" target="_blank">
+          Bagus Nur A.
+          <sup><Icon icon="lucide:external-link" class="footer__icon" /></sup>
+        </a>
+      </p>
       <p class="footer__sub">
         This project is created in my spare time and intended as a fun project for learning Vue. You can find the source code on 
-        <a href="https://github.com/bagusNA/anime-sagasu" class="footer__link">
+        <a href="https://github.com/bagusNA/anime-sagasu" class="footer__link" target="_blank">
           <Icon icon="ion:logo-github" class="footer__icon" />
           GitHub
+          <sup><Icon icon="lucide:external-link" class="footer__icon" /></sup>
         </a>
       </p>
     </div>
@@ -22,14 +29,15 @@ import { Icon } from '@iconify/vue';
 @use '@/assets/variables' as var;
 
 .footer {
-  padding: 25px 0;
-  margin-top: 60px;
-  background-color: var.$color-darker-accent;
+  padding: 15px 0;
+  margin-top: 40px;
+  color: var.$color-accent;
+  background-color: var.$color-primary;
   text-align: center;
 
   &__container {
     margin: auto;
-    width: 85%;
+    width: 90%;
   }
 
   &__main {
@@ -39,7 +47,7 @@ import { Icon } from '@iconify/vue';
 
   &__sub {
     font-size: var.$fs-xs;
-    color: rgba($color: #000000, $alpha: 0.75);
+    color: rgba($color: var.$color-accent, $alpha: 0.75);
   }
 
   &__link {
@@ -47,13 +55,14 @@ import { Icon } from '@iconify/vue';
     transition: 200ms;
 
     &:hover {
-      color: rgba($color: #000000, $alpha: 0.7);
+      color: rgba($color: var.$color-accent, $alpha: 0.7);
     }
   }
 }
 
 @media only screen and (min-width: 600px) {
   .footer {
+    padding: 20px 0;
     &__container {
       width: 75%;
     }
