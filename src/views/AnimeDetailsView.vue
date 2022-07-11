@@ -6,6 +6,8 @@ import { Icon } from '@iconify/vue';
 import Anime from '@/models/Anime';
 import type { Anime as IAnime} from '@/models/types/Anime';
 
+import DescriptionSection from '@/components/layouts/sections/DescriptionSection.vue';
+
 const route = useRoute();
 const id = parseInt(route.params.id as string);
 const data = ref<IAnime>(await (await Anime.getAnimeFullById(id)).data);
@@ -50,6 +52,13 @@ console.log(data.value)
         </div>
       </div>
     </div>
+
+    <div class="content">
+      <DescriptionSection 
+        :synopsis="data.synopsis"
+        :background="data.background"
+      />
+    </div>
   </div>
 </template>
 
@@ -70,6 +79,7 @@ console.log(data.value)
 
 .header {
   display: flex;
+  margin-bottom: 15px;
 
   &__poster {
     display: flex;
