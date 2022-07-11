@@ -4,10 +4,10 @@ import { ref } from 'vue';
 
 const props = defineProps<{
   title: string,
-  showByDefault?: boolean
+  hideByDefault?: boolean
 }>();
 
-const show = ref(props.showByDefault ?? true);
+const show = ref(!props.hideByDefault ?? true);
 </script>
 
 <template>
