@@ -4,10 +4,12 @@ import { ref } from 'vue';
 
 const props = defineProps<{
   title: string,
-  hideByDefault?: boolean
+  hideByDefault?: boolean,
+  noContentPadding?: boolean
 }>();
 
 const show = ref(!props.hideByDefault ?? true);
+const noContentPadding = ref(props.noContentPadding)
 </script>
 
 <template>
@@ -28,6 +30,7 @@ const show = ref(!props.hideByDefault ?? true);
     <Transition name="slide">
       <div v-show="show"
         class="section__content"
+        :class="{ 'p-0': noContentPadding }"
       >
         <slot></slot>
       </div>
@@ -42,8 +45,11 @@ const show = ref(!props.hideByDefault ?? true);
 
 $transition-duration: 0.2s;
 
+.p-0 {
+  padding: 0 !important;
+}
+
 .section {
-  padding: 5px;
   border-radius: 5px;
   color: var.$color-primary;
   background-color: var.$color-accent;
@@ -51,13 +57,14 @@ $transition-duration: 0.2s;
 
   &__header {
     display: flex;
-    margin-bottom: 2px;
+    padding: 5px;
     cursor: pointer;
     user-select: none;
   }
 
   &__content {
-    padding: 0 10px;
+    padding: 0 15px;
+    padding-bottom: 10px;
     color: var.$color-text;
     font-size: var.$fs-xs;
     overflow: hidden;
