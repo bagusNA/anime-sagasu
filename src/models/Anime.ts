@@ -1,5 +1,10 @@
 import { urlFetch } from '@/helper/fetch';
 import { Options } from '@/options';
+import { useQuery } from '@vue/apollo-composable';
+
+import type { Ref } from 'vue';
+// @ts-ignore
+import { getAnime } from './graphql/AnimeQuery.gql';
 
 const Anime = {
   get url() {
@@ -18,8 +23,14 @@ const Anime = {
     return urlFetch(`${Anime.url}?q=${query}&type=movie&sfw=true`);
   },
 
-  getAnimeFullById: (id: number) => {
-    return urlFetch(`${Anime.url}/${id}/full`);
+  getAnimeFullById: (id: number): Ref<any> => {
+    const { result } = useQuery(getAnime, { id });
+
+    return result;
+  },
+
+  getAnimeCharacters: async (id: number) => {
+    return (await urlFetch(`${Anime.url}/${id}/characters`)).data;
   }
 }
 

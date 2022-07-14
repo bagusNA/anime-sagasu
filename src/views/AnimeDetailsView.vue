@@ -1,65 +1,66 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
 import Anime from '@/models/Anime';
-import type { Anime as IAnime} from '@/models/types/Anime';
-
 import DescriptionSection from '@/components/layouts/sections/DescriptionSection.vue';
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);
-const data = ref<IAnime>(await (await Anime.getAnimeFullById(id)).data);
+const data = Anime.getAnimeFullById(id);
+const media = ref();
 
-console.log(data.value)
+// @ts-ignore
+watch(data, value => media.value = value.Media);
 
 </script>
 
 <template>
-  <div 
-    class="banner" 
-    :style="{ backgroundImage: `url(${data.images?.jpg?.large_image_url!})` }"
-  >
-  </div>
-  <div class="container">
-    <div class="header">
-      <div class="header__poster">
-        <img 
-          :src="data.images?.jpg?.large_image_url!" 
-          :alt="data.title + ' Poster'"
-          class="header__poster__image"
-        >
-      </div>
-      <div class="header__content">
-        <h1 class="title">{{ data.title }}</h1>
-        <div class="stats">
-          <p class="stats__score">
-            <Icon icon="ion:star" />
-            {{ data.score ?? '-' }}
-          </p>
-          <p class="stats__members">{{ data.members }} users</p>
-          <p>Ranked #{{ data.rank ?? ' -' }}</p>
-          <p v-if="data.season && data.year">
-            {{ `${data.season} ${data.year}` }}
-          </p>
-          <p v-else>-</p>
-          <p>{{ data.type }}</p>
-          <p v-if="data.episodes">
-            {{ data.episodes }} Episode{{ data.episodes! > 1 ? 's' : ''}}
-          </p>
-          <p v-else>-</p>
+  <template v-if="media">
+    <div 
+      class="banner" 
+      :style="{ backgroundImage: `url(${media.bannerImage})` }"
+    >
+    </div>
+    <div class="container">
+      <div class="header">
+        <div class="header__poster">
+          <img 
+            :src="media.coverImage.large" 
+            :alt="`${media.title.romaji} Poster`"
+            class="header__poster__image"
+          >
+        </div>
+        <div class="header__content">
+          <h1 class="title">{{ media.title.romaji }}</h1>
+          <div class="stats">
+            <p class="stats__score">
+              <Icon icon="ion:star" />
+              {{ media.averageScore ?? '-' }}
+            </p>
+            <p class="stats__members">{{ media.popularity }} users</p>
+            <!-- <p>Ranked #{{ data.rank ?? ' -' }}</p> -->
+            <p v-if="media.season && media.seasonYear">
+              {{ `${media.season} ${media.seasonYear}` }}
+            </p>
+            <p v-else>-</p>
+            <p>{{ media.format }}</p>
+            <p v-if="media.episodes">
+              {{ media.episodes }} Episode{{ media.episodes! > 1 ? 's' : ''}}
+            </p>
+            <p v-else>-</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="content">
-      <DescriptionSection 
-        :synopsis="data.synopsis"
-        :background="data.background"
-      />
+      <div class="content">
+        <DescriptionSection 
+          :synopsis="media.description"
+        />
+      </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <style scoped lang="scss">

@@ -1,0 +1,44 @@
+query getAnime($id: Int) {
+  Media (id: $id, type: ANIME) {
+    id
+    title {
+      romaji
+      english
+      native
+    }
+    coverImage {
+      large
+      color
+    }
+    bannerImage
+    season
+    seasonYear
+    format
+    episodes
+    averageScore
+    popularity
+		description
+    
+    status
+		startDate {
+		  year
+		  month
+		  day
+		}
+    endDate {
+      year
+      month
+      day
+    }
+    studios {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    source
+    genres
+    duration
+  }
+}
