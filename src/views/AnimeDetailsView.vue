@@ -16,14 +16,14 @@ const media = computed(() => data.value ? data.value.Media : null);
   <template v-if="media">
     <div 
       class="banner" 
-      :style="{ backgroundImage: `url(${media.bannerImage})` }"
+      :style="{ backgroundImage: `url(${media.bannerImage ?? media.coverImage.extraLarge})` }"
     >
     </div>
     <div class="container">
       <div class="header">
         <div class="header__poster">
           <img 
-            :src="media.coverImage.large" 
+            :src="media.coverImage.extraLarge" 
             :alt="`${media.title.romaji} Poster`"
             class="header__poster__image"
           >
