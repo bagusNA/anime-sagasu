@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { Media } from '@/models/types/Media';
+// import type { Media } from '@/models/types/Media';
 import { RouterLink } from 'vue-router';
 
 defineProps<{
   title: string,
-  items: Media[],
+  // items: Media[],
+  items: any[],
   link?: string,
   width?: string
 }>();
@@ -20,21 +21,21 @@ defineProps<{
       </RouterLink>
     </div>
     <div class="side-collection__main">
-      <RouterLink 
-        v-for="item in items" :key="item.mal_id"
-        :to="{ name: 'anime', params: { id: item.mal_id } }"
+      <RouterLink v-for="item in items" 
+        :key="item.id"
+        :to="{ name: 'anime', params: { id: item.id } }"
         class="side-collection__card"
       >
         <img 
-          :src="item.images?.jpg?.image_url!" 
-          :alt="item.title" 
+          :src="item.coverImage.large" 
+          :alt="item.title.romaji" 
           class="side-collection__card__poster"
         >
 
         <div class="side-collection__card__main">
-          <p class="side-collection__card__title">{{ item.title }}</p>
-          <span class="side-collection__card__info">{{ `${item.type}, scored ${item.score ?? '-'}` }} </span>
-          <span class="side-collection__card__info">{{ `${item.members} members` }}</span>
+          <p class="side-collection__card__title">{{ item.title.romaji }}</p>
+          <span class="side-collection__card__info">{{ `${item.format}, scored ${item.averageScore ?? '-'}` }} </span>
+          <span class="side-collection__card__info">{{ `${item.popularity} members` }}</span>
         </div>
       </RouterLink>
     </div>

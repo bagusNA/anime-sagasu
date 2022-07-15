@@ -2,12 +2,13 @@
 import { RouterLink } from "vue-router";
 import { useKeenSlider } from "keen-slider/vue.es";
 
-import type { Media } from '@/models/types/Media';
+// import type { Media } from '@/models/types/Media';
 import Card from './Card.vue';
 
 const { items } = defineProps<{
   title: string,
-  items: Media[],
+  // items: Media[],
+  items: any[]
   href?: string
 }>();
 
@@ -52,11 +53,11 @@ const [sliderContainer] = useKeenSlider({
     <div ref="sliderContainer" class="collection__main keen-slider">
       <RouterLink
         v-for="item in items" 
-        :to="{ name: 'anime', params: { id: item.mal_id } }"
+        :to="{ name: 'anime', params: { id: item.id } }"
       >
         <Card 
-          :title="item.title"
-          :image="item.images?.jpg?.image_url!"
+          :title="item.title.romaji"
+          :image="item.coverImage.large"
           class="keen-slider__slide"
         />
       </RouterLink>

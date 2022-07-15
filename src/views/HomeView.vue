@@ -2,23 +2,27 @@
 import Collection from '@/components/Collection.vue';
 import SideCollection from '@/components/SideCollection.vue';
 import Season from '@/models/Season';
+import { computed } from 'vue';
 
-const data = await Season.getSeasonNow();
-const slicedItems = data.data.slice(0,10)
-
+const data = Season.getSeasonNow();
+const media = computed(() => data.value ? data.value.Page.media : null);
 </script>
 
 <template>
   <div class="home">
-    <section class="home__main">
-      <Collection title="This Season" :items="slicedItems" href="#" />
-      <Collection title="This Season" :items="slicedItems" href="#" />
-      <Collection title="This Season" :items="slicedItems" href="#" />
+    <section v-if="media" 
+      class="home__main"
+    >
+      <Collection title="This Season" :items="media" href="#" />
+      <Collection title="This Season" :items="media" href="#" />
+      <Collection title="This Season" :items="media" href="#" />
     </section>
-    <aside class="home__side-content">
-      <SideCollection title="TestTestTestTestTestTestTestTest" :items="slicedItems.slice(0, 3)" />
-      <SideCollection title="Test" :items="slicedItems.slice(3, 6)" />
-      <SideCollection title="Test" :items="slicedItems.slice(6, 9)" />
+    <aside v-if="media" 
+      class="home__side-content"
+    >
+      <SideCollection title="TestTestTestTestTestTestTestTest" :items="media.slice(0, 3)" />
+      <SideCollection title="Test" :items="media.slice(3, 6)" />
+      <SideCollection title="Test" :items="media.slice(6, 9)" />
     </aside>
   </div>
 </template>
