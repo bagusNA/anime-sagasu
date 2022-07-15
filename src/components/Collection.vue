@@ -15,23 +15,27 @@ const { items } = defineProps<{
 const [sliderContainer] = useKeenSlider({
   renderMode: "performance",
   loop: false,
-  mode: "snap",
+  mode: "free-snap",
   slides: {
     perView: 3,
     spacing: 10
   },
   breakpoints: {
     '(min-width: 600px)': {
-      slides: { perView: 4, spacing: 10 }
+      slides: { perView: 4, spacing: 10 },
+      mode: "snap",
     },
     '(min-width: 768px)': {
-      slides: { perView: 5, spacing: 15 }
+      slides: { perView: 5, spacing: 15 },
+      mode: "snap",
     },
     '(min-width: 1024px)': {
-      slides: { perView: 6, spacing: 20 }
+      slides: { perView: 6, spacing: 20 },
+      mode: "snap",
     },
     '(min-width: 1280px)': {
-      slides: { perView: 7, spacing: 20 }
+      slides: { perView: 7, spacing: 20 },
+      mode: "snap",
     },
   }
 })
