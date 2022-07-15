@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
 import Anime from '@/models/Anime';
-import DescriptionSection from '@/components/layouts/sections/DescriptionSection.vue';
+import BaseSection from '@/components/layouts/sections/BaseSection.vue';
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);
@@ -51,9 +51,9 @@ const media = computed(() => data.value ? data.value.Media : null);
       </div>
 
       <div class="content">
-        <DescriptionSection 
-          :synopsis="media.description"
-        />
+        <BaseSection title="Description">
+          <p v-html="media.description"></p>
+        </BaseSection>
       </div>
     </div>
   </template>
