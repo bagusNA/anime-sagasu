@@ -58,11 +58,11 @@ const [sliderContainer] = useKeenSlider({
       <RouterLink
         v-for="item in items" 
         :to="{ name: 'anime', params: { id: item.id } }"
+        class="keen-slider__slide"
       >
         <Card 
           :title="item.title.romaji"
           :image="item.coverImage.large"
-          class="keen-slider__slide"
         />
       </RouterLink>
     </div>
