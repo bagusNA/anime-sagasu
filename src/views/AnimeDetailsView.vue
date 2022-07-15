@@ -87,6 +87,8 @@ const media = computed(() => data.value ? data.value.Media : null);
     &__image {
       width: 110px;
       border-radius: 5px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
     }
   }
 

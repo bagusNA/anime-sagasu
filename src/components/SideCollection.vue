@@ -102,6 +102,8 @@ $border-radius: 5px;
     &__poster {
       height: 100%;
       border-radius: 5px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
       transition: 100ms;
     }
 

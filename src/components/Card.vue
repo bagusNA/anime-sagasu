@@ -21,6 +21,8 @@ defineProps<{
   &__poster {
     width: 100%;
     border-radius: 5px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
     box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.5);
   }
 
