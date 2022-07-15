@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed } from '@vue/reactivity';
 import { useRoute } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
@@ -9,11 +9,7 @@ import DescriptionSection from '@/components/layouts/sections/DescriptionSection
 const route = useRoute();
 const id = parseInt(route.params.id as string);
 const data = Anime.getAnimeFullById(id);
-const media = ref();
-
-// @ts-ignore
-watch(data, value => media.value = value.Media);
-
+const media = computed(() => data.value ? data.value.Media : null);
 </script>
 
 <template>

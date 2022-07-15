@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import Collection from '@/components/Collection.vue';
 import SideCollection from '@/components/SideCollection.vue';
 import Season from '@/models/Season';
-import { computed } from 'vue';
 
 const data = Season.getSeasonNow();
 const media = computed(() => data.value ? data.value.Page.media : null);
