@@ -67,7 +67,8 @@ const media = computed(() => data.value ? data.value.Media : null);
 .banner {
   height: 150px;
   background-size: cover;
-  filter: brightness(0.75);
+  background-position: center;
+  filter: brightness(0.65);
 }
 
 .container {
