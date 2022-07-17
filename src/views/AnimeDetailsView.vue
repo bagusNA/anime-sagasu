@@ -5,6 +5,7 @@ import { Icon } from '@iconify/vue';
 
 import Anime from '@/models/Anime';
 import BaseSection from '@/components/layouts/sections/BaseSection.vue';
+import CharacterSection from '@/components/layouts/sections/CharacterSection.vue';
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);
@@ -54,6 +55,7 @@ const media = computed(() => data.value ? data.value.Media : null);
         <BaseSection title="Description">
           <p v-html="media.description"></p>
         </BaseSection>
+        <CharacterSection :charList="media.characters.edges" />
       </div>
     </div>
   </template>
@@ -98,6 +100,11 @@ const media = computed(() => data.value ? data.value.Media : null);
     padding-top: 10px;
     padding-left: 10px;
   }
+}
+
+.content {
+  @include mixins.flex-column;
+  row-gap: 15px;
 }
 
 .stats {

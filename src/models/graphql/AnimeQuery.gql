@@ -41,5 +41,28 @@ query getAnime($id: Int) {
     source
     genres
     duration
+
+    characters (sort: ROLE) {
+      edges {
+        node {
+          name {
+            full
+          }
+          image {
+            medium
+          }
+      	}
+        role
+        voiceActors {
+          name {
+            full
+          }
+          languageV2
+          image {
+            medium
+          }
+        }
+      }
+    }
   }
 }
